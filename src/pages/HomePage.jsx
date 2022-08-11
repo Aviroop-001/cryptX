@@ -8,8 +8,8 @@ const HomePage = () => {
   return (
     <Box>
         <Header/>
-        <Dashboard/>
         <AllCoins/>
+        <Dashboard/>
     </Box>
   )
 }

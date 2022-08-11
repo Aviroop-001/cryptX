@@ -36,10 +36,10 @@ const Dashboard = () => {
   }, [])
   
   return (
-    <Box height='50vh' width='90vw' margin='1px auto' border='1px solid blue'>
+    <Box height='50vh' width='90vw' margin='1px auto' border='1px solid blue' marginBottom='4rem' marginTop='3rem'>
     <Box height='55%' width='100%' margin='1px auto' display='flex' justifyContent='space-around' alignItems='center' padding='1px auto' border='1px solid red'>
       {trendingCoins?.map( coin =>(
-        <TrendingCoin key={coin.id} coin={coin.item} />
+        <TrendingCoin key={coin.item.id} coin={coin.item} />
       ))}
     </Box>
     <Box height='45%' width='100%' display='flex' justifyContent='space-around' alignItems='center' padding='1px auto' >

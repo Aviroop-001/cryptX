@@ -1,10 +1,20 @@
-import React from 'react'
+import { React, useContext } from 'react'
 import { Box, Image, Text,Stat ,StatNumber,StatHelpText,StatArrow} from '@chakra-ui/react'
 import { convertToICS } from '../../logic'
+import { ContextState } from '../../Context/ContextProvider';
 
 const CoinDetails = ({coin}) => {
+
+  //states
+  const { currency, setcurrency, selectedCoin, setselectedCoin } = ContextState();
+
+  //functions
+  const selectCoin =() =>{
+    setselectedCoin(coin);
+  }
+
   return (
-    <Box height='4.5rem' width='100%' display='flex' flexDirection='row' justifyContent='space-evenly' alignItems='center' padding='5px' borderRadius='5px' _hover={{boxShadow:'1px 1px 3px grey'}}>
+    <Box height='4.5rem' width='100%' display='flex' flexDirection='row' justifyContent='space-evenly' alignItems='center' padding='5px' borderRadius='5px' _hover={{boxShadow:'1px 1px 3px grey'}} onClick={(e) => selectCoin()}>
             <Image src={coin.image} height='3.5rem' width='3.5rem' borderRadius='50%'>
             </Image>
             <Text fontFamily='exo' fontWeight='bolder'>{coin.name}</Text>

@@ -1,6 +1,8 @@
 import { Box, StackDivider, VStack, Image, Text,Stat ,StatNumber,StatHelpText,StatArrow, Menu, MenuButton, Button, MenuList, MenuItem, Input} from '@chakra-ui/react'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import {React, useState, useEffect} from 'react'
+import {React, useState, useEffect, useContext} from 'react'
+import { ContextState } from '../Context/ContextProvider';
+import { Link } from "react-router-dom";
 import Axios from 'axios'
 import { allCoinsMarket } from '../api'
 import CoinDetails from './secondary/CoinDetails'
@@ -8,7 +10,7 @@ import CoinDetails from './secondary/CoinDetails'
 const AllCoins = () => {
 
   //states
-  const [currency, setcurrency] = useState();
+  const { currency, setcurrency, selectedCoin, setselectedCoin } = ContextState();
   const [allCoins, setallCoins] = useState();
 
   //functions
@@ -22,6 +24,7 @@ const AllCoins = () => {
     }
   }
 
+
   useEffect(() => {
     fetchAllCoinsMarket();
   }, [])
@@ -29,7 +32,6 @@ const AllCoins = () => {
 
   return (
     <Box
-    height='100vh'
     width='90vw'
     margin='2rem auto'>
         <Box width='80%'
@@ -59,7 +61,9 @@ const AllCoins = () => {
         padding='0.5rem'
         width='100%'>
           {allCoins?.map(coin =>(
-            <CoinDetails coin={coin}/>
+            <Link key={coin.id} to={`/coins/${coin.id}`}>
+              <CoinDetails coin={coin}/>
+            </Link>
           ))}
       </VStack>
     </Box>
