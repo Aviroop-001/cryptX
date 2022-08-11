@@ -1,12 +1,19 @@
 import './App.css';
-import Dashboard from './components/Dashboard';
-import Header from './components/Header';
+import HomePage from './pages/HomePage';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <Header/>
-      <Dashboard/>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<HomePage />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
