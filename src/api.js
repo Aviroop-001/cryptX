@@ -1,6 +1,12 @@
 
-export const latestCryptoNewsEndpoint = () => `https://newsdata.io/api/1/crypto?apikey=pub_100209094d87d72ef051c7efb83c3bce7c3c5&country=in,gb,us,de,fr&language=en` ;
+export const latestCryptoNewsEndpoint = () => `https://crypto-news-live3.p.rapidapi.com/news` ;
+
+export const latestNewsBySearch = (search) => `https://google-news.p.rapidapi.com/v1/search?q=${search}&country=US&lang=en`;
 
 export const trendingCoinsEndpoint =(currency) => `https://api.coingecko.com/api/v3/search/trending?vs_currency=${currency}`;
 
-export const allCoinsMarket = (currency) => `https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order= market_cap_desc&price_change_percentage=1h,24h,7d`
+export const allCoinsMarket = (currency) => `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order= market_cap_desc&price_change_percentage=1h,24h,7d`
+
+// export const getSelectedCoinMarket = (coinID) => `https://api.coingecko.com/api/v3/coins/${coinID}?localization=false`
+
+export const getSelectedCoinHistory = (coinID, currency, range) => `https://api.coingecko.com/api/v3/coins/${coinID}/market_chart?vs_currency=${currency}&days=${range}`

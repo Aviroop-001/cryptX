@@ -4,7 +4,7 @@ export const Context = createContext();
 
 export const ContextProvider = ({children}) =>{
 
-    const [currency, setcurrency] = useState('usd');
+    const [currency, setcurrency] = useState("usd");
     const [selectedCoin, setselectedCoin] = useState();
 
     return (
