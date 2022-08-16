@@ -4,6 +4,7 @@ import { Box, Image, Text, Stat, StatArrow, StatNumber, StatGroup, Progress } fr
 import Axios from 'axios'
 import Header from '../components/Header'
 import Graphs from '../components/secondary/Graphs';
+import GraphGroup from '../components/GraphGroup';
 import { getSelectedCoinHistory } from '../api';
 import { convertToICS, toDateTime } from '../logic';
 import { ContextState } from '../Context/ContextProvider';
@@ -11,26 +12,20 @@ import { ContextState } from '../Context/ContextProvider';
 const SingleCoinPage = () => {
 
   //states
-  const { currency, setcurrency, selectedCoin, setselectedCoin } = ContextState();
-  const [historicalPricesData, sethistoricalPricesData] = useState();
-  const [historicalMarketCapData, sethistoricalMarketCapData] = useState();
+  const { currency, setcurrency, selectedCoin, setselectedCoin,historyRange, sethistoryRange } = ContextState();
+  const [historicalPricesData, sethistoricalPricesData] = useState([]);
+  const [historicalMarketCapData, sethistoricalMarketCapData] = useState([]);
 
-  //functions
-  // const getSingleCoinDetails = async() =>{
-  //   const {data} = await Axios.get(getSelectedCoinMarket(selectedCoin.id));
-  //   // setselectedCoin(data);
-  // }
-  const getSingleCoinHistoryPrice10D = async() =>{
-    const {data} = await Axios.get(getSelectedCoinHistory(selectedCoin.id, currency, '10'));
+  const getSingleCoinHistory = async() =>{
+    const {data} = await Axios.get(getSelectedCoinHistory(selectedCoin.id, currency, historyRange));
     console.log("Coin's History Fetched");
     sethistoricalPricesData(data.prices);
     sethistoricalMarketCapData(data.market_caps);
-    console.log(data.prices);
   }
 
   useEffect(() => {
-    getSingleCoinHistoryPrice10D();
-  }, [selectedCoin]);
+    getSingleCoinHistory();
+  }, [selectedCoin, historyRange]);
   
 
   return (
@@ -42,7 +37,7 @@ const SingleCoinPage = () => {
       </Text>
 
       {/* Coin Market Details */}
-      <Box display='flex' flexDirection='row' textAlign='center' justifyContent='space-evenly' alignItems='center' margin='1rem'>
+      <Box display='flex' flexDirection='row' textAlign='center' justifyContent='space-evenly' alignItems='center' margin='3rem 1rem'>
         <Box fontFamily='Poppins'>
           <Text fontSize='6xl' fontWeight='bolder' fontFamily='montserrat'>{selectedCoin.market_cap_rank}</Text>
           Market Rank
@@ -54,7 +49,7 @@ const SingleCoinPage = () => {
       </Box>
 
       {/* Coin Details */}
-      <Box display='flex' flexDirection='row' justifyContent='space-evenly' margin='2rem 1rem'>
+      <Box display='flex' flexDirection='row' justifyContent='space-evenly' margin='4rem 1rem'>
         {/* Coin Icon */}
         <Image src={selectedCoin.image} height='11rem' width='11rem'>
         </Image>
@@ -101,7 +96,7 @@ const SingleCoinPage = () => {
       {/* Charts */}
       <Box border='1px solid yellow'>
           {/* <Line /> */}
-          {historicalPricesData ? <Graphs priceData={historicalPricesData} />
+          {historicalPricesData ? <GraphGroup priceData={historicalPricesData} capitalData={historicalMarketCapData} />
           : <Progress colorScheme='red' height='4px' width='90%' margin='5px auto' borderRadius='5px' size='xs' isIndeterminate />
           }
       </Box>

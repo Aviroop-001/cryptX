@@ -6,10 +6,11 @@ export const ContextProvider = ({children}) =>{
 
     const [currency, setcurrency] = useState("usd");
     const [selectedCoin, setselectedCoin] = useState();
+    const [historyRange, sethistoryRange] = useState("7");
 
     return (
         <Context.Provider value={{
-            currency, setcurrency, selectedCoin, setselectedCoin
+            currency, setcurrency, selectedCoin, setselectedCoin, historyRange, sethistoryRange
         }}>
             {children}
         </Context.Provider>

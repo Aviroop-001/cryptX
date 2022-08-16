@@ -1,26 +1,18 @@
 import { Box } from '@chakra-ui/react'
 import React from 'react'
-import { getDateTime } from '../../logic';
+import { getDateTime, convertToICS } from '../../logic';
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 
 const Graphs = ({priceData}) => {
 
-    //Filtering alternate dates to beautify data
-    priceData = priceData.filter(function(d, idx) {
-        if (idx%2 === 0) {
-            return false; // skip
-        }
-        return true;
-    });
-
     const options = {
         responsive: true,
         maintainAspectRatio: true,
         plugins: {
-          legend: {
-            position: 'top',
-          },
+          // legend: {
+          //   position: 'top',
+          // },
           title: {
             // display: true,
             text: 'Chart.js Line Chart',
