@@ -10,9 +10,9 @@ const Graphs = ({priceData}) => {
         responsive: true,
         maintainAspectRatio: true,
         plugins: {
-          // legend: {
-          //   position: 'top',
-          // },
+          legend: {
+            display: false,
+          },
           title: {
             // display: true,
             text: 'Chart.js Line Chart',

@@ -1,5 +1,5 @@
 import {React, useEffect, useState} from 'react'
-import { Box, Image, Text, Stat, StatArrow, StatNumber, StatGroup, Progress } from '@chakra-ui/react';
+import { Box, Image, Text, Stat, StatArrow, StatNumber, StatGroup, Progress,Flex, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack } from '@chakra-ui/react';
 // import { Line } from 'react-chartjs-2';
 import Axios from 'axios'
 import Header from '../components/Header'
@@ -15,19 +15,26 @@ const SingleCoinPage = () => {
   const { currency, setcurrency, selectedCoin, setselectedCoin,historyRange, sethistoryRange } = ContextState();
   const [historicalPricesData, sethistoricalPricesData] = useState([]);
   const [historicalMarketCapData, sethistoricalMarketCapData] = useState([]);
+  const [sliderValue, setsliderValue] = useState(2);
+  
 
+  //functions
   const getSingleCoinHistory = async() =>{
     const {data} = await Axios.get(getSelectedCoinHistory(selectedCoin.id, currency, historyRange));
     console.log("Coin's History Fetched");
     sethistoricalPricesData(data.prices);
     sethistoricalMarketCapData(data.market_caps);
   }
-
+  
   useEffect(() => {
     getSingleCoinHistory();
   }, [selectedCoin, historyRange]);
   
-
+  const handleChange = (value) =>{
+    setsliderValue(value);
+    sethistoryRange(value);
+  }
+  
   return (
     <Box width='100%' backgroundColor='#1F1D36' border='1px solid red' color='wheat'>
       <Header/>
@@ -94,8 +101,42 @@ const SingleCoinPage = () => {
       </Box>
       
       {/* Charts */}
-      <Box border='1px solid yellow'>
-          {/* <Line /> */}
+      <Flex marginTop='10rem' justifyContent='center'>
+      <NumberInput maxW='100px' mr='2rem' value={sliderValue} onChange={handleChange} allowMouseWheel min={2} max={365}>
+        <NumberInputField />
+        <NumberInputStepper>
+          <NumberIncrementStepper />
+          <NumberDecrementStepper />
+        </NumberInputStepper>
+      </NumberInput>
+      <Slider
+        flex='0.5'
+        min={2}
+        max={365}
+        colorScheme='green'
+        focusThumbOnChange={false}
+        value={sliderValue}
+        onChange={handleChange}>
+        <SliderMark
+        fontSize='md'
+        fontWeight='bolder'
+        value={sliderValue}
+        textAlign='center'
+        color='wheat'
+        mt='-8'
+        ml='-5'
+        w='20'>
+          {sliderValue} day(s)
+        </SliderMark>
+        <SliderTrack>
+          <SliderFilledTrack />
+        </SliderTrack>
+        <SliderThumb fontSize='sm' boxSize='22px' />
+      </Slider>
+    </Flex>
+      <Box
+      // border='1px solid yellow'
+      >
           {historicalPricesData ? <GraphGroup priceData={historicalPricesData} capitalData={historicalMarketCapData} />
           : <Progress colorScheme='red' height='4px' width='90%' margin='5px auto' borderRadius='5px' size='xs' isIndeterminate />
           }
