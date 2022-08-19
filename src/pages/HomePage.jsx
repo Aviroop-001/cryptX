@@ -6,7 +6,7 @@ import Header from '../components/Header'
 
 const HomePage = () => {
   return (
-    <Box>
+    <Box backgroundColor='#1F1D36' color='wheat'>
         <Header/>
         <AllCoins/>
         <Dashboard/>

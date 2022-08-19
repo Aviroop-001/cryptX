@@ -33,39 +33,40 @@ const AllCoins = () => {
   return (
     <Box
     width='90vw'
-    margin='2rem auto'>
+    margin='2rem auto'
+    marginTop='5rem'>
         <Box width='80%'
         height='5rem'
         display='flex'
         flexDirection='row'
-        margin='1px auto'>
+        margin='1px auto'
+        marginBottom='15vh'>
             <Input margin='auto 2rem' colorScheme='facebook'>
             </Input>
             <Menu colorScheme='cyan'>
-              <MenuButton margin='auto 1rem' as={Button} rightIcon={<ArrowDropDownIcon />}>
-                Sort by
+              <MenuButton margin='auto 1rem' color='navy' fontWeight='bolder' as={Button} rightIcon={<ArrowDropDownIcon />}>
+                Sort by&nbsp;&nbsp;
               </MenuButton>
-              <MenuList>
-                <MenuItem>Market Capital: low to high</MenuItem>
-                <MenuItem>Market Capital: high to low</MenuItem>
-                <MenuItem>Volume: low to high</MenuItem>
-                <MenuItem>Volume: high to low</MenuItem>
-                <MenuItem>Name: A-Z</MenuItem>
+              <MenuList  color='navy' backgroundColor='blue.100'>
+                <MenuItem fontWeight='bolder'>Market Capital: low to high</MenuItem>
+                <MenuItem fontWeight='bolder'>Market Capital: high to low</MenuItem>
+                <MenuItem fontWeight='bolder'>Volume: low to high</MenuItem>
+                <MenuItem fontWeight='bolder'>Volume: high to low</MenuItem>
+                <MenuItem fontWeight='bolder'>Name: A-Z</MenuItem>
               </MenuList>
             </Menu>
         </Box>
-        <VStack
-        divider={<StackDivider borderColor='gray.200' />}
-        spacing={1}
-        align='stretch'
-        padding='0.5rem'
-        width='100%'>
+        <Box
+        width='100%'
+        display='flex'
+        justifyContent='space-evenly'
+        flexWrap='wrap'>
           {allCoins?.map(coin =>(
             <Link key={coin.id} to={`/coins/${coin.id}`}>
               <CoinDetails coin={coin}/>
             </Link>
           ))}
-      </VStack>
+      </Box>
     </Box>
   )
 }

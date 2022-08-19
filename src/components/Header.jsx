@@ -20,7 +20,7 @@ const Header = () => {
 
   //component
   return (
-    <Box width="100vw" height="5rem" margin="2rem 0px" display='flex' justifyContent='center' alignItems='center'>
+    <Box width="100vw" height="8rem" padding="2rem 0px" display='flex' justifyContent='center' alignItems='center'>
       <Text width='80%' textAlign='center'>Symbol</Text>
       <Menu maxWidth='5rem'>
         <MenuButton as={Button} padding='5px 10px' rightIcon={<KeyboardArrowDownIcon />}>
