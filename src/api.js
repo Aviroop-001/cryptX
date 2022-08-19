@@ -5,7 +5,9 @@ export const latestNewsBySearch = (search) => `https://google-news.p.rapidapi.co
 
 export const trendingCoinsEndpoint =(currency) => `https://api.coingecko.com/api/v3/search/trending?vs_currency=${currency}`;
 
-export const allCoinsMarket = (currency) => `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order= market_cap_desc&price_change_percentage=1h,24h,7d`
+
+//FIXME: API call not working
+export const allCoinsMarket = (currency, order) => `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order= ${order}&price_change_percentage=1h,24h,7d`
 
 // export const getSelectedCoinMarket = (coinID) => `https://api.coingecko.com/api/v3/coins/${coinID}?localization=false`
 

@@ -10,13 +10,13 @@ import CoinDetails from './secondary/CoinDetails'
 const AllCoins = () => {
 
   //states
-  const { currency, setcurrency, selectedCoin, setselectedCoin } = ContextState();
+  const { currency,setcurrency,selectedCoin,setselectedCoin,allCoinsOrder,setallCoinsOrder } = ContextState();
   const [allCoins, setallCoins] = useState();
 
   //functions
   const fetchAllCoinsMarket= async() =>{
     try {
-      const {data} = await Axios.get(allCoinsMarket(currency));
+      const {data} = await Axios.get(allCoinsMarket(currency, allCoinsOrder));
       console.log("Coins' market fetched successfully");
       setallCoins(data);
     } catch (err) {
