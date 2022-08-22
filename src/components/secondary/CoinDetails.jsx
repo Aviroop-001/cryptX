@@ -43,7 +43,7 @@ const CoinDetails = ({coin}) => {
                 {(coin.price_change_percentage_1h_in_currency>=0) ? <StatArrow type='increase' color='lime' />
                 : <StatArrow type='decrease' color='crimson' />
                 }
-                {coin.price_change_percentage_1h_in_currency.toString().slice(0,5)}%
+                {coin.price_change_percentage_1h_in_currency?.toString().slice(0,5)}%
               </StatNumber>
             </Stat>
             </Tooltip>
@@ -53,7 +53,7 @@ const CoinDetails = ({coin}) => {
                 {(coin.price_change_percentage_24h_in_currency>=0) ? <StatArrow type='increase' color='lime' />
                 : <StatArrow type='decrease' color='crimson' />
                 }
-                {coin.price_change_percentage_24h_in_currency.toString().slice(0,5)}%
+                {coin.price_change_percentage_24h_in_currency?.toString().slice(0,5)}%
               </StatNumber>
             </Stat>
             </Tooltip>
@@ -63,7 +63,7 @@ const CoinDetails = ({coin}) => {
                 {(coin.price_change_percentage_7d_in_currency>=0) ? <StatArrow type='increase' color='lime' />
                 : <StatArrow type='decrease' color='crimson' />
                 }
-                {coin.price_change_percentage_7d_in_currency.toString().slice(0,5)}%
+                {coin.price_change_percentage_7d_in_currency?.toString().slice(0,5)}%
               </StatNumber>
             </Stat>
             </Tooltip>

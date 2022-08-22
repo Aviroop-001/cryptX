@@ -7,7 +7,7 @@ export const ContextProvider = ({children}) =>{
     const [currency, setcurrency] = useState("usd");
     const [selectedCoin, setselectedCoin] = useState();
     const [historyRange, sethistoryRange] = useState("7");
-    const [allCoinsOrder, setallCoinsOrder] = useState("market_cap_asc");
+    const [allCoinsOrder, setallCoinsOrder] = useState("market_cap_desc");
 
     return (
         <Context.Provider value={{

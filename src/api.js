@@ -7,7 +7,7 @@ export const trendingCoinsEndpoint =(currency) => `https://api.coingecko.com/api
 
 
 //FIXME: API call not working
-export const allCoinsMarket = (currency, order) => `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order= ${order}&price_change_percentage=1h,24h,7d`
+export const allCoinsMarket = (currency, order) => `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=${order}&price_change_percentage=1h,24h,7d`
 
 // export const getSelectedCoinMarket = (coinID) => `https://api.coingecko.com/api/v3/coins/${coinID}?localization=false`
 

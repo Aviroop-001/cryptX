@@ -1,4 +1,4 @@
-import { Box, StackDivider, VStack, Image, Text,Stat ,StatNumber,StatHelpText,StatArrow, Menu, MenuButton, Button, MenuList, MenuItem, Input} from '@chakra-ui/react'
+import { Box, StackDivider, VStack, Image, Text,Stat ,StatNumber,StatHelpText,StatArrow, Menu, MenuButton, Button, MenuList, MenuItem, Input, Select, Progress} from '@chakra-ui/react'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import {React, useState, useEffect, useContext} from 'react'
 import { ContextState } from '../Context/ContextProvider';
@@ -24,10 +24,16 @@ const AllCoins = () => {
     }
   }
 
+  const handleOrderChange = async(e) =>{
+    setallCoinsOrder(e.target.value);
+  }
 
   useEffect(() => {
     fetchAllCoinsMarket();
   }, [])
+  useEffect(() => {
+    fetchAllCoinsMarket();
+  }, [allCoinsOrder])
   
 
   return (
@@ -39,33 +45,31 @@ const AllCoins = () => {
         height='5rem'
         display='flex'
         flexDirection='row'
+        alignItems='center'
         margin='1px auto'
         marginBottom='15vh'>
             <Input margin='auto 2rem' colorScheme='facebook'>
             </Input>
-            <Menu colorScheme='cyan'>
-              <MenuButton margin='auto 1rem' color='navy' fontWeight='bolder' as={Button} rightIcon={<ArrowDropDownIcon />}>
-                Sort by&nbsp;&nbsp;
-              </MenuButton>
-              <MenuList  color='navy' backgroundColor='blue.100'>
-                <MenuItem fontWeight='bolder'>Market Capital: low to high</MenuItem>
-                <MenuItem fontWeight='bolder'>Market Capital: high to low</MenuItem>
-                <MenuItem fontWeight='bolder'>Volume: low to high</MenuItem>
-                <MenuItem fontWeight='bolder'>Volume: high to low</MenuItem>
-                <MenuItem fontWeight='bolder'>Name: A-Z</MenuItem>
-              </MenuList>
-            </Menu>
+            <Select defaultValue='market_cap_desc' variant='flushed' borderRadius='10px' colorScheme='teal' width='35vw' textAlign='center' fontWeight='bolder' backgroundColor='teal.700'
+            onChange={handleOrderChange}>
+              <option value='market_cap_asc' style={{backgroundColor:'#e4f0d8', color:'#1F1D36', fontFamily:'exo', fontWeight:'bolder'}}>Market Capital: Ascending</option>
+              <option value='market_cap_desc' style={{backgroundColor:'#e4f0d8', color:'#1F1D36', fontFamily:'exo', fontWeight:'bolder'}}>Market Capital Descending</option>
+              <option value='volume_asc' style={{backgroundColor:'#e4f0d8', color:'#1F1D36', fontFamily:'exo', fontWeight:'bolder'}}>Volume: Ascending</option>
+              <option value='volume_desc' style={{backgroundColor:'#e4f0d8', color:'#1F1D36', fontFamily:'exo', fontWeight:'bolder'}}>Volume: Descending</option>
+              <option value='id_asc' style={{backgroundColor:'#e4f0d8', color:'#1F1D36', fontFamily:'exo', fontWeight:'bolder'}}>Name: A-Z</option>
+            </Select>
         </Box>
         <Box
         width='100%'
         display='flex'
         justifyContent='space-evenly'
         flexWrap='wrap'>
-          {allCoins?.map(coin =>(
+          {allCoins? allCoins.map(coin =>(
             <Link key={coin.id} to={`/coins/${coin.id}`}>
               <CoinDetails coin={coin}/>
             </Link>
-          ))}
+          )) : <Progress size='xs' width='100%' height='3px' isIndeterminate colorScheme='teal' />
+        }
       </Box>
     </Box>
   )
